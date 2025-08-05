@@ -3,18 +3,27 @@ import { useState } from "react";
 import Die from "./components/Die";
 import { nanoid } from 'nanoid';
 
-/**
- * Challenge: Update the array of numbers in state to be
- * an array of objects instead. Each object should look like:
- * { value: <random number>, isHeld: false }
- *
- * Making this change will break parts of our code, so make
- * sure to update things so we're back to a working state
- */
+ /**
+     * Challenge: Update the `hold` function to flip
+     * the `isHeld` property on the object in the array
+     * that was clicked, based on the `id` prop passed
+     * into the function.
+     * 
+     * Hint: as usual, there's more than one way to 
+     * accomplish this.
+     */ 
+
 export default function App() {
   const [randomNumbers, setRandomNumbers] = useState(generateAllNewDice());
 
-  const numbers = randomNumbers.map((itemObject) => <Die id={itemObject.id} value={itemObject.value} />);
+  const numbers = randomNumbers.map((itemObject) => 
+  <Die key={itemObject.id}
+   value={itemObject.value}
+   isHeld = {itemObject.isHeld}
+   hold = {()=>hold(itemObject.id)} 
+   id ={itemObject.id}
+   />);
+   
 
   function generateAllNewDice() {
     const newDice = [];
@@ -32,6 +41,18 @@ export default function App() {
   function rollDice() {
     setRandomNumbers(generateAllNewDice());
   }
+
+
+    function hold(id) {
+        setRandomNumbers(oldDice => {
+            return oldDice.map(die => {
+                return die.id === id ?
+                    {...die, isHeld: !die.isHeld} :
+                    die
+            })
+        })
+
+      }
 
   return (
     <main>
