@@ -12,6 +12,18 @@ body {
     justify-content: center;
     align-items: center;
 }
+.title {
+    font-size:40px;
+    margin-left: 300px;
+   
+}
+
+.instructions {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    margin-top: 0;
+    text-align: center;
+}
 
 div#root {
     height: 100%;
@@ -24,7 +36,7 @@ main {
     background-color: #F5F5F5;
     height: 100%;
     border-radius: 5px;  
-    padding-top: 35%;
+    padding-top: 20%;
      
 }
 .dice{

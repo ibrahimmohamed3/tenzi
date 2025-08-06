@@ -3,15 +3,7 @@ import { useState } from "react";
 import Die from "./components/Die";
 import { nanoid } from 'nanoid';
 
- /**
-     * Challenge: Update the `hold` function to flip
-     * the `isHeld` property on the object in the array
-     * that was clicked, based on the `id` prop passed
-     * into the function.
-     * 
-     * Hint: as usual, there's more than one way to 
-     * accomplish this.
-     */ 
+
 
 export default function App() {
   const [randomNumbers, setRandomNumbers] = useState(generateAllNewDice());
@@ -39,7 +31,11 @@ export default function App() {
   }
 
   function rollDice() {
-    setRandomNumbers(generateAllNewDice());
+    setRandomNumbers(oldDice => oldDice.map(die => 
+            die.isHeld ?
+                die :
+                { ...die, value:  Math.floor(Math.random() * 6) }
+    ));
   }
 
 
@@ -56,6 +52,8 @@ export default function App() {
 
   return (
     <main>
+      <h1 className="title">Tenzies</h1>
+            <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
       <div className="dice">{numbers}</div>
       <button onClick={rollDice} className="btn-dice">
         Roll
